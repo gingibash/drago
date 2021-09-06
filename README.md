@@ -96,7 +96,7 @@ A Docker container is provided for those interested in building and running Drag
 In order to perform a containerized build of Drago's Docker image, run:
 
 ```
-$ make container DOCKER=1
+make container DOCKER=1
 ```
 
 This will build a minimal Docker image containing the Drago binary. The `DOCKER` flag ensures that the build takes place within a Docker container, thus removing the entry barrier for potential users.
@@ -104,13 +104,13 @@ This will build a minimal Docker image containing the Drago binary. The `DOCKER`
 Once the build process finishes, start the Drago agent in development mode with:
 
 ```
-$ docker run -ti -p 8080:8080 drago agent --dev
+docker run -ti -p 8080:8080 drago agent --dev
 ```
 
 You can now interact with the system through the Web UI, available at `http://localhost:8080/`. Alternatively, you can also interact with Drago through the command-line interface:
 
 ```
-$ docker run --network host drago
+docker run --network host drago
 ```
 
 ## Development
@@ -123,13 +123,13 @@ In order to develop Drago, your environment should meet the following requiremen
 For the sake of convenience, the Drago agent can be initialized in development mode, meaning that it will execute both the client and the server logic. To start the Drago agent in development mode, run:
 
 ```
-$ go run main.go agent --dev
+go run main.go agent --dev
 ```
 
 While the agent is running, Drago's UI will be accessible at `127.0.0.1:8080`. If you see a message instead of the UI, it means that it hasn't been built properly. You can easily build the UI project with:
 
 ```
-$ go generate
+go generate
 ```
 
 Note that the `--dev` flag also configures the server to use the in-memory storage backend instead of `etcd`. Therefore, any state will be destroyed whenever the agent is stopped.
@@ -137,11 +137,11 @@ Note that the `--dev` flag also configures the server to use the in-memory stora
 To apply independent customizations to client and server, start them with:
 
 ```
-$ go run main.go agent --client --config=<path-to-config-file>
+go run main.go agent --client --config=<path-to-config-file>
 ```
 and
 ```
-$ go run main.go agent --server --config=<path-to-config-file>
+go run main.go agent --server --config=<path-to-config-file>
 ```
 
 We also provide the `air.sh` script, which makes use of `comstrek/air` to perform hot-reloading of the Drago agent. When running Drago through the `air.sh` script, the binary will be rebuilt and restarted whenever a change is detected in the codebase.
@@ -151,7 +151,7 @@ We also provide the `air.sh` script, which makes use of `comstrek/air` to perfor
 The Drago web UI, can be launched independently from the binary so that developers can benefit from the covenient features offered by React's development server e.g., hot-reloading. To start Drago's UI in development mode and independently from the binary, `cd` into the `/ui/` directory and run:
 
 ```
-$ yarn && yarn start
+yarn && yarn start
 ```
 
 This will download all required dependencies, and launch React's development server. The UI can then be accessed at `http://localhost:3000/ui/`.
@@ -163,18 +163,18 @@ While running the Web UI independently from the Drago binary is possible, this s
 
 To build the Drago binary, run:
 ```
-$ go generate
-$ go build
+go generate
+go build
 ```
 
 Alternatively, you can build Drago with `make`. To do so, run:
 ```
-$ make dev
+make dev
 ```
 
 In order to get a comprehensive list of build options, run:
  ```
- $ make help
+make help
  ```
 
 ## Contributing
